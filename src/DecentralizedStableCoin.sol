@@ -66,7 +66,7 @@ contract DecentralizedStableCoin is ERC20Burnable, Ownable {
     if(_amount <= 0) {
         revert DecentralizedStableCoin__MustBeMoreThanZero();
     }
-    _mint(_to, _amount); // we can call this directly, because we didnt initially override the _mint function
+    _mint(_to, _amount); // we can call this directly, because we didnt initially override the _mint function (ok, but why didnt we override this function)
     return true;
   }
 }

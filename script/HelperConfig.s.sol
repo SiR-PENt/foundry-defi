@@ -9,16 +9,16 @@ import { ERC20Mock } from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
 contract HelperConfig is Script {
 
     struct NetworkConfig {
-        address wethUsdPriceFeed; //weth is the ERC20 version of eth
-        address wbtcUsdPriceFeed; //wbtc is the ERC20 version of btc
-        address weth;
-        address wbtc;
+        address wethUsdPriceFeed; 
+        address wbtcUsdPriceFeed; 
+        address weth; //weth is the ERC20 version of eth. Now, 1 wETH == 1 ETH and since it's ERC20 compatible, it can be transferred around decentralized platforms unlike eth
+        address wbtc; //wbtc is the ERC20 version of btc
         uint256 deployerKey;   
     }
 
     uint8 public constant DECIMALS = 8;
-    int256 public constant ETH_USD_PRICE = 2000e8;
-    int256 public constant BTC_USD_PRICE = 1000e8;
+    int256 public constant ETH_USD_PRICE = 2000e8; //hard coded price for eth for the anvil chain
+    int256 public constant BTC_USD_PRICE = 1000e8; //hard coded price for btc for the anvil chain
     uint256 public DEFAULT_ANVIL_KEY = 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 
     NetworkConfig public activeNetworkConfig;
@@ -44,7 +44,7 @@ contract HelperConfig is Script {
 
     function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
 
-        if(activeNetworkConfig.wethUsdPriceFeed != address(0)) {
+        if(activeNetworkConfig.wethUsdPriceFeed != address(0)) { // check if the script has not been deployed before
             return activeNetworkConfig;
         }
 
